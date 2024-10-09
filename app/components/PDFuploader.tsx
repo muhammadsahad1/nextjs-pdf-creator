@@ -24,7 +24,8 @@ const PDFUploader: React.FC<PDFUploaderProps> = ({ onUploadSuccess }) => {
         name: 'file',
         accept: '.pdf',
         multiple: false,
-        action: '/api/upload',
+        action: `${process.env.BACKEND_URL}/upload`,
+        className: 'upload-wrapper',
         beforeUpload,
         onChange(info: any) {
             const { status } = info.file
@@ -44,10 +45,10 @@ const PDFUploader: React.FC<PDFUploaderProps> = ({ onUploadSuccess }) => {
     return (
         <Upload.Dragger {...props}>
             <div className="p-4">
-                <p className="ant-upload-drag-icon">
+                <p className="ant-upload-drag-icon ">
                     <UploadOutlined />
                 </p>
-                <p className="ant-upload-text">Click or drag PDF to this area to upload</p>
+                <p className=" text-zinc-300 text-xl font-poppins">Click or drag PDF to this area to upload</p>
             </div>
         </Upload.Dragger>
     )

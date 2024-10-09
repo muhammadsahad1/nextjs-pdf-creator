@@ -9,8 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        dark: '#3F3F3F', // Adding a custom dark color
+        'dark-secondary': '#1a1a1a', // Adding another custom color
+        zinc: {
+          900: '#3F3F3F', // Adding Zinc-900 color
+        },
       },
     },
   },

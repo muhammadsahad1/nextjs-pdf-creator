@@ -1,4 +1,5 @@
 
+"use client";
 
 import React, { useState } from 'react'
 import { Layout, Typography, message } from 'antd'
@@ -9,11 +10,12 @@ import { fetchExtractPage } from './api/extract'
 const { Content } = Layout
 const { Title } = Typography
 
-const Home = () => {
+const Home = () => {  
   const [fileId, setFieldId] = useState<string | null>(null)
-
+  console.log("ID =>", fileId)
   const handleExtract = async (pages: number[]) => {
     try {
+      console.log("called")
       const blobData = await fetchExtractPage(fileId, pages)
       const url = window.URL.createObjectURL(blobData)
 
