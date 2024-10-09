@@ -1,7 +1,49 @@
-import Image from "next/image";
 
-export default function Home() {
+
+import React, { useState } from 'react'
+import { Layout, Typography, message } from 'antd'
+import PDFUploader from './components/PDFuploader'
+import PDFPreview from './components/PDFPreview'
+import { fetchExtractPage } from './api/extract'
+
+const { Content } = Layout
+const { Title } = Typography
+
+const Home = () => {
+  const [fileId, setFieldId] = useState<string | null>(null)
+
+  const handleExtract = async (pages: number[]) => {
+    try {
+      const blobData = await fetchExtractPage(fileId, pages)
+      const url = window.URL.createObjectURL(blobData)
+
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'extracted.pdf'
+      document.body.appendChild(a)
+      a.click()
+
+      document.removeChild(a)
+      window.URL.revokeObjectURL(url)
+
+      message.success('PDF extracted successfully')
+    } catch (error: any) {
+      console.error('Failed to extract pages:', error)
+      message.error('Failed to extract pages')
+    }
+  }
+
   return (
-  <div className="flex justify-center"> Hello Aliens </div>
-  );
+    <Layout className='min-h-screen'>
+      <Content className='p-4'>
+        <Title level={2}>PDF Page Extractor</Title>
+        <PDFUploader onUploadSuccess={setFieldId} />
+        {fileId && (
+          <PDFPreview fileId={fileId} onExtractPages={handleExtract} />
+        )}
+      </Content>
+    </Layout>
+  )
 }
+
+export default Home
