@@ -6,16 +6,19 @@ import { Layout, Typography, message } from 'antd'
 import PDFUploader from './components/PDFuploader'
 import PDFPreview from './components/PDFPreview'
 import { fetchExtractPage } from './api/extract'
+import { Heading } from './components/Heading';
 
 const { Content } = Layout
 const { Title } = Typography
 
-const Home = () => {  
+const Home = () => {
+
+  
   const [fileId, setFieldId] = useState<string | null>(null)
-  console.log("ID =>", fileId)
+  // console.log("ID =>)
   const handleExtract = async (pages: number[]) => {
     try {
-      console.log("called")
+
       const blobData = await fetchExtractPage(fileId, pages)
       const url = window.URL.createObjectURL(blobData)
 
@@ -25,7 +28,7 @@ const Home = () => {
       document.body.appendChild(a)
       a.click()
 
-      document.removeChild(a)
+      document.body.removeChild(a)
       window.URL.revokeObjectURL(url)
 
       message.success('PDF extracted successfully')
@@ -36,9 +39,9 @@ const Home = () => {
   }
 
   return (
-    <Layout className='min-h-screen'>
+    <Layout className='min-h-screen'style={{ backgroundColor: '#000000' }}>
       <Content className='p-4'>
-        <Title level={2}>PDF Page Extractor</Title>
+       <Heading/>
         <PDFUploader onUploadSuccess={setFieldId} />
         {fileId && (
           <PDFPreview fileId={fileId} onExtractPages={handleExtract} />

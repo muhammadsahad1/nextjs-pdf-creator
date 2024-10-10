@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --background: #18181B; /* Zinc-950 color */
+  --background: #000000; /* Black color */
   --foreground: #ffffff; /* White for foreground text */
 }
-
 body {
   color: var(--foreground);
   background-color: var(--background);

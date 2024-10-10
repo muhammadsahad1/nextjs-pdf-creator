@@ -24,7 +24,7 @@ const PDFUploader: React.FC<PDFUploaderProps> = ({ onUploadSuccess }) => {
         name: 'file',
         accept: '.pdf',
         multiple: false,
-        action: `${process.env.BACKEND_URL}/upload`,
+        action: `${process.env.NEXT_PUBLIC_BACKEND_URL}/upload`,
         className: 'upload-wrapper',
         beforeUpload,
         onChange(info: any) {
